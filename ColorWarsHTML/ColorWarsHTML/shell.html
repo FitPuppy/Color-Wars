@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gra - Plansza z Kwadratami</title>
+    <style>
+        .board {
+            display: grid;
+            grid-template-columns: repeat(5, 100px); /* 5 kolumn */
+            grid-template-rows: repeat(5, 100px); /* 5 wierszy */
+            gap: 5px;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            background-color: lightgray;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+		.inner-square {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="board" id="board"></div>
+
+    <script>
+	
+	    var board_cell = [];
+        var board_inner_cell = [];
+			
+        // Funkcja do generowania planszy
+        function generateBoard(rows, cols) {
+            const boardElement = document.getElementById("board");
+			
+			
+			
+            // Tworzenie pustej planszy 2D
+            for (let i = 0; i < rows; i++) {
+                const row = [];
+				const row_ = [];
+                for (let j = 0; j < cols; j++) {
+                    const cell = document.createElement("div");
+                    cell.classList.add("cell");
+                    boardElement.appendChild(cell);
+                    
+					const innerSquare = document.createElement('div')
+					innerSquare.classList.add("inner-square");
+					cell.appendChild(innerSquare);
+					
+                    // Przechowywanie referencji do komórki w tablicy
+                    row.push(cell);
+					row_.push(innerSquare);
+                }
+                board_cell.push(row);
+				board_inner_cell.push(row_);
+            }
+        }
+
+        // Funkcja do ustawiania wnętrza komórki (kolor, rozmiar wewnętrznego kwadratu)
+        function setCell(x, y, color, color_, size,) {
+            const cell = board_cell[y][x]; // Dostęp do komórki przez referencję
+			const is = board_inner_cell[y][x];
+			
+            cell.style.backgroundColor = color_; // Zmiana koloru tła komórki
+            is.style.backgroundColor = color;
+			
+            // Ustawianie wielkości wewnętrznego kwadratu
+			is.style.width = `${size * 25}%`;
+			is.style.height = `${size * 25}%`;
+            
+        }
+
+        // Generowanie planszy 5x5
+        generateBoard(5, 5);
+
+        // Przykład ustawienia komórek
+        setCell(1, 1, "orange", 4);  // Ustawienie pomarańczowego dużego kwadratu w komórce (1, 1)
+        setCell(2, 2, "blue", 2);    // Ustawienie niebieskiego średniego kwadratu w komórce (2, 2)
+        setCell(3, 3, "green", 1);   // Ustawienie zielonego małego kwadratu w komórce (3, 3)
+    </script>
+	{{{ SCRIPT }}}
+</body>
+</html>
