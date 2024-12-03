@@ -1,0 +1,2 @@
+﻿  main.cpp
+D:\repos\ColorWarsHTML\ColorWarsHTML\main.cpp(6,10): error C1083: Nie można otworzyć pliku dołącz: 'emscripten.h': No such file or directory
